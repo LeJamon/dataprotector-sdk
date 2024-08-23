@@ -1,11 +1,9 @@
 import { Wallet } from 'ethers';
-import { IExec, utils } from 'iexec';
+import { getIExec } from './utils.js';
 
-const createDatasetFor = async (owner, rpc) => {
+const createDatasetFor = async owner => {
   const datasetOwnerWallet = Wallet.createRandom();
-  const iexecDatasetOwner = new IExec({
-    ethProvider: utils.getSignerFromPrivateKey(rpc, datasetOwnerWallet.privateKey),
-  });
+  const iexecDatasetOwner = getIExec(datasetOwnerWallet.privateKey);
 
   const { address: datasetAddress } = await iexecDatasetOwner.dataset.deployDataset({
     owner,

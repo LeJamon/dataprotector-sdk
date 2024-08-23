@@ -1,15 +1,15 @@
 import { Wallet } from 'ethers';
-import { IExec, utils } from 'iexec';
+import { getIExec } from './utils.js';
 
-const createWorkerpool = async rpc => {
+const createWorkerpool = async () => {
   const workerpoolOwnerWallet = Wallet.createRandom();
-  const iexecWorkerpoolOwner = new IExec({
-    ethProvider: utils.getSignerFromPrivateKey(rpc, workerpoolOwnerWallet.privateKey),
-  });
+  const iexecWorkerpoolOwner = getIExec(workerpoolOwnerWallet.privateKey);
+
   const { address: workerpoolAddress } = await iexecWorkerpoolOwner.workerpool.deployWorkerpool({
     owner: workerpoolOwnerWallet.address,
     description: 'Test workerpool',
   });
+
   return { iexecWorkerpoolOwner, workerpoolAddress };
 };
 

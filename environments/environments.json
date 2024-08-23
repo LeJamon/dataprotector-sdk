@@ -94,16 +94,16 @@
     "workerpoolRegistryAddress": "0x6Cb57fA761812c34645C945cA89AAe3602D42eD3",
 
     "dataprotectorContractAddress": "0xc96304e3c037f81dA488ed9dEa1D8F2a48278a75",
-    "dataprotectorSharingContractAddress": "0x22753E4264FDDc6181dc7cce468904A80a363E44",
+    "dataprotectorSharingContractAddress": "0x01c1DeF3b91672704716159C9041Aeca392DdFfb",
     "dataprotectorSubgraphUrl": "http://thegraph.wp-throughput.az1.internal:8000/subgraphs/name/DataProtector-v2",
-    "ipfsNode": "https://ipfs-upload.v8-bellecour.iex.ec",
-    "ipfsGateway": "https://ipfs-gateway.v8-bellecour.iex.ec",
+    "ipfsNode": "http://thegraph.wp-throughput.az1.internal:5001",
+    "ipfsGateway": "http://result.wp-throughput.az1.internal:8080",
 
     "dataprotectorStartBlock": "0",
     "dataprotectorSharingStartBlock": "0",
     "addOnlyAppWhitelistRegistryStartBlock": "0",
 
-    "addOnlyAppWhitelistRegistryContractAddress": "0xD0141E899a65C95a556fE2B27e5982A6DE7fDD7A",
+    "addOnlyAppWhitelistRegistryContractAddress": "0x927b167526bAbB9be047421db732C663a0b77B11",
     "protectedDataDeliveryWhitelistAddress": "0x09837d47ea140b3843a63983088e45fa9f837dcf",
     "protectedDataDeliveryDappAddress": "0x86c42D1e7f0695044B92F3d35b8C14f03Ea07c3c",
     "protectedDataDeliveryDappEns": "protected-data-delivery-bubble.apps.iexec.eth",

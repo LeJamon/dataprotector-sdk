@@ -1,4 +1,13 @@
+import { getEnvironment } from '@iexec/dataprotector-environments';
+import 'dotenv/config';
+
+const { ENV } = process.env;
+
+const { hubAddress, datasetRegistryAddress, appRegistryAddress, voucherHubAddress } = getEnvironment(ENV);
+
 export const SMART_CONTRACT_ADDRESS_FILE = '.smart-contract-address';
-export const POCO_ADDRESS = '0x3eca1B216A7DF1C7689aEb259fFB83ADFB894E7f';
-export const DATASET_REGISTRY_ADDRESS = '0x799DAa22654128d0C64d5b79eac9283008158730';
-export const APP_REGISTRY_ADDRESS = '0xB1C52075b276f87b1834919167312221d50c9D16';
+
+export const POCO_ADDRESS = hubAddress;
+export const DATASET_REGISTRY_ADDRESS = datasetRegistryAddress;
+export const APP_REGISTRY_ADDRESS = appRegistryAddress;
+export const VOUCHER_HUB_ADDRESS = voucherHubAddress;

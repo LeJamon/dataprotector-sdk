@@ -10,7 +10,6 @@ import { createWorkerpool, createWorkerpoolOrder } from './singleFunction/worker
 import { DATASET_REGISTRY_ADDRESS } from '../config/config.js';
 
 const { ethers } = pkg;
-const rpcURL = pkg.network.config.url;
 
 async function main() {
   const { ENV } = process.env;
@@ -31,7 +30,7 @@ async function main() {
     await dataProtectorSharingContract.ADD_ONLY_APP_WHITELIST_REGISTRY(),
   );
   const registry = await ethers.getContractAt('IRegistry', DATASET_REGISTRY_ADDRESS);
-  const appAddress = await createAppFor(dataprotectorSharingContractAddress, rpcURL);
+  const appAddress = await createAppFor(dataprotectorSharingContractAddress);
   console.log('AppAddress :', appAddress);
 
   // create new addOnlyAppWhitelistContract
@@ -48,7 +47,7 @@ async function main() {
   const txAddApp = await addOnlyAppWhitelistContract.addApp(appAddress);
   await txAddApp.wait();
 
-  const { iexecWorkerpoolOwner, workerpoolAddress } = await createWorkerpool(rpcURL);
+  const { iexecWorkerpoolOwner, workerpoolAddress } = await createWorkerpool();
   const workerpoolOrder = await createWorkerpoolOrder({ iexecWorkerpoolOwner, workerpoolAddress });
   /** *************************************************************************
    *                       Subscription                                       *
@@ -60,7 +59,7 @@ async function main() {
     console.log('Collection Id', collectionTokenId);
 
     for (let i = 0; i < 2; i++) {
-      const protectedDataAddress = await createDatasetFor(owner.address, rpcURL);
+      const protectedDataAddress = await createDatasetFor(owner.address);
       const tokenId = ethers.getBigInt(protectedDataAddress.toLowerCase()).toString();
       const tx1 = await registry.approve(dataprotectorSharingContractAddress, tokenId);
       await tx1.wait();
@@ -104,7 +103,7 @@ async function main() {
      ************************************************************************** */
     for (let i = 0; i < 2; i++) {
       const rentingParams = { price: ethers.parseEther('0'), duration: 2_592_000 };
-      const protectedDataAddress = await createDatasetFor(owner.address, rpcURL);
+      const protectedDataAddress = await createDatasetFor(owner.address);
       const tokenId = ethers.getBigInt(protectedDataAddress.toLowerCase()).toString();
       const tx1 = await registry.approve(dataprotectorSharingContractAddress, tokenId);
       await tx1.wait();
@@ -139,7 +138,7 @@ async function main() {
      ************************************************************************** */
     for (let i = 0; i < 2; i++) {
       const salePrice = ethers.parseEther('0');
-      const protectedDataAddress = await createDatasetFor(owner.address, rpcURL);
+      const protectedDataAddress = await createDatasetFor(owner.address);
       const tokenId = ethers.getBigInt(protectedDataAddress.toLowerCase()).toString();
       const tx1 = await registry.approve(dataprotectorSharingContractAddress, tokenId);
       await tx1.wait();
