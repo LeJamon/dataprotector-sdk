@@ -8,6 +8,9 @@ import {
   getTestConfig,
   timeouts,
 } from '../../test-utils.js';
+import 'dotenv/config';
+
+const { ENV } = process.env;
 
 describe('dataProtector.subscribeToCollection()', () => {
   let walletEndUser: HDNodeWallet;
@@ -94,22 +97,23 @@ describe('dataProtector.subscribeToCollection()', () => {
             async () => {
               const { collectionId } =
                 await dataProtectorCreator.sharing.createCollection();
-
-              const subscriptionParams = { price: 100, duration: 2000 };
+              let subscriptionParams = { price: 0, duration: 2000 };
+              if (ENV == 'bellecour-fork') {
+                subscriptionParams.price = 100;
+                await depositNRlcForAccount(
+                  walletEndUser.address,
+                  subscriptionParams.price
+                );
+                await approveAccount(
+                  walletEndUser.privateKey,
+                  DEFAULT_SHARING_CONTRACT_ADDRESS,
+                  subscriptionParams.price
+                );
+              }
               await dataProtectorCreator.sharing.setSubscriptionParams({
                 collectionId,
                 ...subscriptionParams,
               });
-
-              await depositNRlcForAccount(
-                walletEndUser.address,
-                subscriptionParams.price
-              );
-              await approveAccount(
-                walletEndUser.privateKey,
-                DEFAULT_SHARING_CONTRACT_ADDRESS,
-                subscriptionParams.price
-              );
 
               const subscribeResult =
                 await dataProtectorEndUser.sharing.subscribeToCollection({
@@ -132,17 +136,18 @@ describe('dataProtector.subscribeToCollection()', () => {
               const { collectionId } =
                 await dataProtectorCreator.sharing.createCollection();
 
-              const subscriptionParams = { price: 100, duration: 2000 };
+              let subscriptionParams = { price: 0, duration: 2000 };
+              if (ENV === 'bellecour-fork') {
+                subscriptionParams.price = 100;
+                await depositNRlcForAccount(
+                  walletEndUser.address,
+                  subscriptionParams.price
+                );
+              }
               await dataProtectorCreator.sharing.setSubscriptionParams({
                 collectionId,
                 ...subscriptionParams,
               });
-
-              await depositNRlcForAccount(
-                walletEndUser.address,
-                subscriptionParams.price
-              );
-
               const subscribeResult =
                 await dataProtectorEndUser.sharing.subscribeToCollection({
                   collectionId,

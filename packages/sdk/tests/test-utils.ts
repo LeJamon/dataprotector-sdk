@@ -166,12 +166,8 @@ export const deployRandomApp = async (
     teeFramework?: TeeFramework;
   } = {}
 ) => {
-  const ethProvider =
-    options.ethProvider || getWeb3Provider(Wallet.createRandom().privateKey);
-  const iexecAppModule = new IExecAppModule(
-    { ethProvider },
-    getTestIExecOption()
-  );
+  const wallet = Wallet.createRandom();
+  const iexecAppModule = getIExec(wallet.privateKey);
   const { address } = await iexecAppModule.deployApp({
     owner: ethProvider.address,
     name: 'test-do-not-use',

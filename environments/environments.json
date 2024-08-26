@@ -97,7 +97,7 @@
     "dataprotectorSharingContractAddress": "0x01c1DeF3b91672704716159C9041Aeca392DdFfb",
     "dataprotectorSubgraphUrl": "http://thegraph.wp-throughput.az1.internal:8000/subgraphs/name/DataProtector-v2",
     "ipfsNode": "https://ipfs-upload.v8-bellecour.iex.ec",
-    "ipfsGateway": "http://result.wp-throughput.az1.internal:8080",
+    "ipfsGateway": "https://ipfs-gateway.v8-bellecour.iex.ec",
 
     "dataprotectorStartBlock": "0",
     "dataprotectorSharingStartBlock": "0",

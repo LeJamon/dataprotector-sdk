@@ -426,7 +426,7 @@ describe('dataProtectorCore.processProtectedData()', () => {
       );
     });
   } else {
-    console.log(`Voucher not yet deployed in [${ENV}] environment`);
+    console.log(`Voucher tests not yet configured for [${ENV}] environment`);
     test('placeholder test', () => {
       expect(true).toBe(true);
     });

@@ -7,7 +7,6 @@ import {
   deployRandomApp,
   getRandomAddress,
   getTestConfig,
-  getTestWeb3SignerProvider,
 } from '../../test-utils.js';
 import { WorkflowError } from '../../../src/index.js';
 import { MarketCallError } from 'iexec/errors';
