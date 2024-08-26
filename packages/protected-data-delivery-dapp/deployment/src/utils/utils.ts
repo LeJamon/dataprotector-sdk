@@ -1,12 +1,41 @@
 import fs from 'fs/promises';
 import { IExec, utils } from 'iexec';
-import { HOST } from '../../config/config.js';
+import 'dotenv/config';
+import { getEnvironment, KnownEnv } from '@iexec/dataprotector-environments';
+
+const { ENV } = process.env;
+
+const {
+  chainId,
+  rpcURL,
+  hubAddress,
+  ensRegistryAddress,
+  ensPublicResolverAddress,
+  smsURL,
+  iexecGatewayURL,
+  resultProxyURL,
+  ipfsGatewayURL,
+  pocoSubgraphURL,
+  voucherSubgraphURL,
+} = getEnvironment(ENV as KnownEnv);
+
+const iexecOptions = {
+  chainId,
+  rpcURL,
+  hubAddress,
+  ensPublicResolverAddress,
+  ensRegistryAddress,
+  pocoSubgraphURL,
+  voucherSubgraphURL,
+  resultProxyURL,
+  smsURL,
+  ipfsGatewayURL,
+  iexecGatewayURL,
+};
 
 export const getIExec = (privateKey: string): IExec => {
-  const ethProvider = utils.getSignerFromPrivateKey(HOST, privateKey);
-  return new IExec({
-    ethProvider,
-  });
+  const ethProvider = utils.getSignerFromPrivateKey(rpcURL, privateKey);
+  return new IExec({ ethProvider }, iexecOptions);
 };
 
 export const getDockerImageChecksum = async (
